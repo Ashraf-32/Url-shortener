@@ -23,8 +23,13 @@ def index(request):
                     break
         else:    
             short = get_short_code()
-            url = Url(url=link, short=short)
-            url.save()
+            if request.user.is_authenticated:
+                owner = request.user
+                url = Url(url=link, short=short, owner=owner)
+                url.save()
+            else:
+                url = Url(url=link, short=short)
+                url.save()
         new_url = request.get_host() + "/" + short
         return render(request, 'shorturl/index.html', {"new_url":new_url})
 
