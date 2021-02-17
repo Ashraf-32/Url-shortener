@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required 
 from .forms import UserRegisterForm
+from shorturl.models import Url
 
 # Create your views here.
 def register(request):
@@ -19,4 +20,8 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    context = {
+        'urls': Url.objects.filter(owner=request.user),
+        'host': request.get_host()
+    }
+    return render(request, 'users/profile.html', context)

@@ -5,10 +5,10 @@ import string
 
 # Create your views here.
 def redirect_url(request, id):
-    urls = Url.objects.filter(short=id)
-    link = ""
-    for i in urls:
-        link = i.url
+    urls = Url.objects.filter(short=id).first()
+    link = urls.url
+    # for i in urls:
+    #     link = i.url
     return redirect(link)
 
 def index(request):
