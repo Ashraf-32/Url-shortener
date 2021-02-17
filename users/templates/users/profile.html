@@ -16,8 +16,7 @@
           <input name="link" type="text" value="{{url.url}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" readonly>
 
           <label for="exampleInputEmail1" class="form-label">Short Link</label>
-          <input name="link" type="text" value="{{host}}/{{url.short}}" class="form-control" id="myInput" aria-describedby="emailHelp" readonly>
-          <button onclick="myFunction()" class="btn btn-primary">COPY</button>
+          <input name="link" type="text" value="{{host}}/l/{{url.short}}" class="form-control" id="myInput" aria-describedby="emailHelp" readonly>
         </div>
       {% endfor %}
         

@@ -30,7 +30,7 @@ def index(request):
             else:
                 url = Url(url=link, short=short)
                 url.save()
-        new_url = request.get_host() + "/" + short
+        new_url = request.get_host() + "/l/" + short
         return render(request, 'shorturl/index.html', {"new_url":new_url})
 
     return render(request, 'shorturl/index.html')
