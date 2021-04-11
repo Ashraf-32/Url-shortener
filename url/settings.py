@@ -25,7 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = 'y4lk!3##7)@*rj-f0#!klzsggkjm3_z*=%bv)=3!!hm24gh4q%'
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.environ.get('DEBUG_VALUE') == True)
+DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
+# DEBUG = False
 
 ALLOWED_HOSTS = ['ashortl.herokuapp.com']
 
@@ -42,6 +43,8 @@ INSTALLED_APPS = [
     'shorturl.apps.ShorturlConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'url.urls'
@@ -86,6 +91,8 @@ DATABASES = {
     }
 }
 
+# Cors headers section
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -118,6 +125,16 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# Rest framework section
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ]
+}
 
 
 # Static files (CSS, JavaScript, Images)

@@ -43,4 +43,4 @@ def get_short_code():
         if Url.objects.filter(short=short_id).exists():
             continue
         else:
-            return short_id 
+            return short_id
