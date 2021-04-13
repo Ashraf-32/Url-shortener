@@ -1,9 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UrlSerializer
+from .serializers import UrlSerializer, UserSerializer
 from shorturl.models import Url
 import string, random
 
+# Url create view
 class UrlAPIView(APIView):
     serializer_class = UrlSerializer
 
@@ -26,6 +27,19 @@ class UrlAPIView(APIView):
         return Response({"details": "Bad request"}, status=400)
 
     
+# Register user view
+class RegisterAPIView(APIView):
+    serializer_class = UserSerializer
+
+    def post(self, *args, **kwargs):
+        serializer = UserSerializer(data=self.request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.create(self.request.data)
+            return Response(serializer.data, status=201)
+        return Response({"details": "Bad request"}, status=400)
+
+
+# Generates short code for url
 def get_short_code():
     length = 6
     char = string.ascii_uppercase + string.digits + string.ascii_lowercase
