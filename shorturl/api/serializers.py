@@ -8,7 +8,7 @@ class UrlSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['short', 'owner', 'date', 'id']
 
-
+# User register serializer
 class UserSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField()
     class Meta:
@@ -28,6 +28,3 @@ class UserSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
         return user
-        
-
-
