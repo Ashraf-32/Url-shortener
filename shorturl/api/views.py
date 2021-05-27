@@ -77,6 +77,7 @@ class ProfileAPIView(generics.ListAPIView, mixins.ListModelMixin):
             "email": request.user.email
         }
         for r in res.data:
+            r['short'] = self.request.get_host() + '/l/' + r['short']
             r.pop('owner')
             r.pop('url_id')
         res.data.insert(0, user_obj)
